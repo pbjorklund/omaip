@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "pbjorklund.omaip",
+  "name": "OmaIP",
+  "version": "0.1.0",
+  "author": "Patrik Bjorklund",
+  "description": "External exit-IP policy status, without local VPN inspection",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "Exit IP",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "mode": "whitelist",
+      "addresses": "",
+      "endpoint": "https://api.ipify.org",
+      "family": "auto",
+      "timeoutSeconds": 8,
+      "intervalSeconds": 60
+    },
+    "schema": [
+      {
+        "key": "mode",
+        "type": "enum",
+        "label": "Policy",
+        "options": [
+          "whitelist",
+          "blacklist"
+        ],
+        "defaultValue": "whitelist"
+      },
+      {
+        "key": "addresses",
+        "type": "string",
+        "label": "IPs or CIDRs, comma-separated",
+        "defaultValue": ""
+      },
+      {
+        "key": "endpoint",
+        "type": "string",
+        "label": "HTTPS plain-text IP endpoint",
+        "defaultValue": "https://api.ipify.org"
+      },
+      {
+        "key": "family",
+        "type": "enum",
+        "label": "Request address family",
+        "options": [
+          "auto",
+          "ipv4",
+          "ipv6"
+        ],
+        "defaultValue": "auto"
+      },
+      {
+        "key": "timeoutSeconds",
+        "type": "integer",
+        "label": "Request timeout (1-30 seconds)",
+        "defaultValue": 8
+      },
+      {
+        "key": "intervalSeconds",
+        "type": "integer",
+        "label": "Poll interval (15-3600 seconds)",
+        "defaultValue": 60
+      }
+    ]
+  }
+}

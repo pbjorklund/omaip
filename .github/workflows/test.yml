@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Checker tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Widget state tests
+        run: node tests/test_state.cjs
+      - name: Package shape
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("manifest.json").read_text())
+          assert manifest["schemaVersion"] == 1
+          assert manifest["id"] == "pbjorklund.omaip"
+          for entry in manifest["entryPoints"].values():
+              assert Path(entry).is_file()
+          for runtime in ("Widget.qml", "Popup.qml", "State.js", "checker.py"):
+              assert Path(runtime).is_file()
+          PY

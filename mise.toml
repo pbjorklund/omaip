@@ -1,0 +1,16 @@
+[tasks.test]
+description = "Run offline checker and widget-state tests"
+run = ["python3 -m unittest discover -s tests -v", "node tests/test_state.cjs"]
+
+[tasks.test-shell]
+description = "Test native popup controls with a headless surface"
+run = "python3 tests/test_shell.py"
+
+[tasks.test-desktop]
+description = "Show a temporary offline test bar and native popup"
+run = "python3 tests/test_shell.py --desktop"
+
+[tasks.validate]
+description = "Run tests and validate the Omarchy manifest"
+depends = ["test"]
+run = "omarchy plugin validate ."
