@@ -2,6 +2,11 @@
 
 OmaIP checks the public IP reported by an external HTTPS service and shows the result in the Omarchy shell bar. It never reads local VPN, interface, route, or system proxy configuration.
 
+When you setup a blacklist or whitelist it will quickly let you know if you are on the IP(s) you think:
+
+<img width="823" height="414" alt="image" src="https://github.com/user-attachments/assets/42310ca6-f6d0-4d09-8b01-20bdec8c16e5" />
+
+
 | Mode | Normal-color thumbs up | Red thumbs down |
 |---|---|---|
 | Whitelist | IP is in the list | IP is not in the list |
