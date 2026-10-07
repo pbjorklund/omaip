@@ -107,3 +107,7 @@ TLS verification stays enabled, redirects are rejected, and responses are capped
 There is no fallback endpoint, persistent IP history, telemetry, firewall enforcement, or routing change. Failed checks never reuse successful results.
 
 Offline tests cover policy, transport, state expiry, and popup/settings wiring. Desktop tests use an in-memory settings host, not your actual shell file. Suspend/resume, full keyboard navigation, multi-monitor dismissal, and the real company proxy path still need operator checks. See [the plan](docs/PLAN.md).
+
+## License
+
+[MIT](LICENSE). Runtime dependencies are listed under Requirements; test dependencies are listed under Tests.
